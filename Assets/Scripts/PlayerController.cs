@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 1600f;
     public int health = 5;
     private int score = 0;
+    public Text scoreText;
 
     void Update()
     {
@@ -35,6 +37,14 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// Updates the ScoreText with the player's current score.
+    /// </summary>
+    void SetScoreText()
+    {
+        scoreText.text = string.Format("Score: {0}", score);
+    }
+
+    /// <summary>
     /// Triggers when colliding with coins, traps, and goals.
     /// </summary>
     /// <param name="other">The collider that collided with the player.</param>
@@ -43,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Pickup"))
         {
             score++;
-            Debug.Log(string.Format("Score: {0}", score));
+            SetScoreText();
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("Trap"))
