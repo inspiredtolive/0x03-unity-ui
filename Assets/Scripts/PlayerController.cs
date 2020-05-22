@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public int health = 5;
     private int score = 0;
     public Text scoreText;
+    public Text healthText;
 
     void Update()
     {
@@ -44,6 +45,11 @@ public class PlayerController : MonoBehaviour
         scoreText.text = string.Format("Score: {0}", score);
     }
 
+    void SetHealthText()
+    {
+        healthText.text = string.Format("Health: {0}", health);
+    }
+
     /// <summary>
     /// Triggers when colliding with coins, traps, and goals.
     /// </summary>
@@ -59,7 +65,7 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("Trap"))
         {
             health--;
-            Debug.Log(string.Format("Health: {0}", health));
+            SetHealthText();
         }
         else if (other.CompareTag("Goal"))
         {
