@@ -22,8 +22,11 @@ public class PlayerController : MonoBehaviour
     {
         if (health == 0)
         {
-            Debug.Log("Game over!");
-             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            winLoseText.text = "Game Over!";
+            winLoseText.color = Color.white;
+            winLoseBG.color = Color.red;
+            winLoseBG.gameObject.SetActive(true);
+            StartCoroutine(LoadScene(3));
         }
     }
 
@@ -55,6 +58,12 @@ public class PlayerController : MonoBehaviour
         healthText.text = string.Format("Health: {0}", health);
     }
 
+    IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     /// <summary>
     /// Triggers when colliding with coins, traps, and goals.
     /// </summary>
@@ -71,13 +80,6 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             SetHealthText();
-            if (health <= 0)
-            {
-                winLoseText.text = "Game Over!";
-                winLoseText.color = Color.white;
-                winLoseBG.color = Color.red;
-                winLoseBG.gameObject.SetActive(true);
-            }
         }
         else if (other.CompareTag("Goal"))
         {
