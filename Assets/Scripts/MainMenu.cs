@@ -19,12 +19,20 @@ public class MainMenu : MonoBehaviour
         
     }
 
-
     /// <summary>
     /// Loads the maze scene.
     /// </summary>
     public void PlayMaze()
     {
         SceneManager.LoadScene("maze");
+    }
+
+    /// <summary>
+    /// Quits the game window.
+    /// </summary>
+    public void QuitMaze()
+    {
+        Debug.Log("Quit Game");
+        Application.Quit();
     }
 }
