@@ -71,6 +71,13 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             SetHealthText();
+            if (health <= 0)
+            {
+                winLoseText.text = "Game Over!";
+                winLoseText.color = Color.white;
+                winLoseBG.color = Color.red;
+                winLoseBG.gameObject.SetActive(true);
+            }
         }
         else if (other.CompareTag("Goal"))
         {
